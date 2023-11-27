@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 11:51:19 by lottavi           #+#    #+#             */
-/*   Updated: 2023/04/14 11:51:21 by lottavi          ###   ########.fr       */
+/*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
+/*   Updated: 2023/11/27 16:07:36 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 static int	ft_calc_num_str(const char *str)
 {
@@ -49,4 +49,41 @@ int	ft_atoi(const char *str)
 	if (min == 1)
 		return (ft_calc_num_str(str + i) * (-1));
 	return (ft_calc_num_str(str + i));
+}
+
+int	main(int argc, char *argv)
+{
+	int	i = 0;
+	t_imput	imput;
+
+	if (argc < 5 || argc > 6)
+		printf(RED, NUM_ARGS, RESET);
+
+		printf(RED, ARG1, RESET);
+	if (argc == 5 || argc == 6)
+	{
+		while (argv[i])
+		{
+			if (ft_atoi(argv[i]) == FALSE)
+				{
+				printf(RED, ARG1, RESET);
+				exit(TRUE);
+				}
+			i++;
+		}
+		imput.number_of_philosophers = ft_atoi(argv[1]);
+		imput.time_to_die = ft_atoi(argv[2]);
+		imput.time_to_eat = ft_atoi(argv[3]);
+		imput.time_to_sleep = ft_atoi(argv[4]);
+		if (argc == 6)
+			imput.number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
+		else
+			imput.number_of_times_each_philosopher_must_eat = FALSE;
+	}
+	return (TRUE);
+}
+
+void	init()
+{
+
 }
