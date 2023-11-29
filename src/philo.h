@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/11/29 12:50:48 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/11/29 12:59:25 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ typedef struct s_philo
 
 # define NUM_ARGS "ERROR: The number of arguments must be 4 or 5"
 # define ARG1 "ERROR: Non numerical parametres"
-# define ALLOC_ERR_1 "ERROR WHILE ALLOCATING THREADS IDs"
-# define ALLOC_ERR_3 "ERROR WHILE ALLOCATING PHILOS"
-# define ALLOC_ERR_2 "ERROR WHILE ALLOCATING FORKS"
 
 # define RESET "\e[0m"
 # define RED "\033[0;31m"
