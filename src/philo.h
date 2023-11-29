@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/11/27 15:36:28 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/11/29 12:50:48 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct s_imput
 {
@@ -26,26 +27,21 @@ typedef struct s_imput
 	int		number_of_times_each_philosopher_must_eat;
 }			t_imput;
 
-typedef struct s_fork
-{
-	int				left;
-	int				right;
-}					t_fork;
-
 typedef struct s_philo
 {
-	int				id;
-	int				num_of_times_ate;
-	long			time_to_die;
-	t_fork			fork;
-	pthread_t		thread;
-}					t_philo;
+	int	id;
+	int	fork
+}	t_philo;
+
 
 # define NUM_ARGS "ERROR: The number of arguments must be 4 or 5"
 # define ARG1 "ERROR: Non numerical parametres"
+# define ALLOC_ERR_1 "ERROR WHILE ALLOCATING THREADS IDs"
+# define ALLOC_ERR_3 "ERROR WHILE ALLOCATING PHILOS"
+# define ALLOC_ERR_2 "ERROR WHILE ALLOCATING FORKS"
 
 # define RESET "\e[0m"
-# define RED "\e[0;31m"
+# define RED "\033[0;31m"
 # define GREEN "\e[0;32m"
 
 # define EAT "is eating"
@@ -56,5 +52,8 @@ typedef struct s_philo
 
 # define TRUE 1
 # define FALSE 0
+
+void	init_command(int argc, char **argv, t_imput *imput);
+int		main(int argc, char **argv);
 
 #endif
