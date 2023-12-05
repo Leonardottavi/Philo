@@ -27,7 +27,17 @@ void	p_sleep(t_philo *philo)
 	printf("%s%s%s\n," SLEEP);
 }
 
-void	p_take_fork(t_philo *philo)
+void	p_take_1(t_philo *philo)
 {
 	printf("%s%s%s\n," BLUE, FORK, RESET);
+}
+
+void	p_take_2(t_philo *philo)
+{
+	printf("%s%s%s\n," BLUE, FORK, RESET);
+}
+
+void	p_think(t_philo *philo)
+{
+	printf("%s%s%s\n," GREEN, THINK, RESET);
 }

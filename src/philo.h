@@ -20,12 +20,15 @@
 
 typedef struct s_philo
 {
-	pthread_t		t1;
 	int				id;
 	int				status;
 	int				eating;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
+	int				last_meal;
+	int				eat_count;
+	int				forks;
+	int				sit;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	t1;
 }	t_philo;
 
 typedef struct s_input
@@ -35,9 +38,6 @@ typedef struct s_input
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		number_of_times_each_philosopher_must_eat;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	write;
 	t_philo	*philo
 }			t_input;
 
@@ -55,15 +55,9 @@ typedef struct s_input
 # define THINK "is thinking"
 # define FORK "has taken a fork"
 # define DIED "died ☠️"
-
 # define TRUE 1
 # define FALSE 0
 
-void	init_command(int argc, char **argv, t_input *input);
-int		main(int argc, char **argv);
-void	p_take_fork(t_philo *philo);
-void	p_sleep(t_philo *philo);
-void	p_dead(t_philo *philo);
-void	p_eat(t_philo *philo);
+
 
 #endif
