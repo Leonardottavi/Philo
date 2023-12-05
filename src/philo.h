@@ -43,6 +43,7 @@ typedef struct s_input
 
 # define NUM_ARGS "ERROR: The number of arguments must be 4 or 5"
 # define ARG1 "ERROR: Non numerical parametres"
+# define TDERR "CREATING THREAD ERROR"
 
 # define RESET "\e[0m"
 # define RED "\033[0;31m"

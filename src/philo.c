@@ -19,7 +19,7 @@ void	philo(s_input *input)
 	{
 		if (pthread_create(input->philo->t1, NULL, &routine, NULL) != 0)
 		{
-			printf("ERRORE CREAZIONE THREAD\n");
+			printf("%s%s%s\n," RED, TDERR, RESET);
 			exit(1);
 		}
 	}
