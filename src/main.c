@@ -51,5 +51,6 @@ int	main(int argc, char **argv)
 	init_command(argc, argv, &input);
 	free(input);
 	free(philo);
+	free(philo->forks);
 }
 
