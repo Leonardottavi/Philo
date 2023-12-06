@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	sleep(t_input *input)
+void	psleep(t_input *input)
 {
 	pthread_mutex_lock(&philo->id);
 	print_blue("Philo is sleeping");
@@ -48,7 +48,7 @@ void	choose_fork(t_input *input)
 	print_blue("Philo has taken the right fork");
 }
 
-void	let_go_forks(t_input *input)
+void	let_go_fork(t_input *input)
 {
 	pthread_mutex_lock(input->philo->fork1);
 	pthread_mutex_unlock(input->philo->fork2);

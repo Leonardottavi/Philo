@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 16:10:18 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:20:42 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	init_philos(t_input *input)
 	int	i;
 
 	i = 0;
-	while (i =< input->number_of_philosophers)
+	while (i <= input->number_of_philosophers)
 	{
 		input->philo[i].eating = 0;
 		input->philo[i].eat_count = 0;
-		pthread_mutex_init(&input->philos[i].fork1, NULL);
-		pthread_mutex_init(&input->philos[i].fork2, NULL);
-		pthread_mutex_init(&input->philos[i].id, NULL);
+		pthread_mutex_init(&input->philo[i].fork1, NULL);
+		pthread_mutex_init(&input->philo[i].fork2, NULL);
+		pthread_mutex_init(&input->philo[i].id, NULL);
 		i++;
 	}
 }
@@ -33,14 +33,14 @@ void	init_input(int argc, char **argv, t_input *input)
 	int i = 0;
 	pthread_mutex_init(&input[i].lock, NULL);
 	if (argc < 5 || argc > 6)
-		print_red("ERROR: The number of arguments must be 4 or 5")
+		print_red("ERROR: The number of arguments must be 4 or 5");
 	if (argc == 5 || argc == 6)
 	{
 		while (argv[i])
 		{
 		if (ft_atoi(argv[i]) == FALSE)
 			{
-			print_red("ERROR: Non numerical parametres")
+			print_red("ERROR: Non numerical parametres");
 			exit(TRUE);
 			}
 			i++;
@@ -63,8 +63,8 @@ void	*routine(t_input *input)
 		sleep(input->philo);
 		think(input->philo);
 		eat(input->philo);
-		choose_forks(input->philo);
-		let_go_forks(input->philo);
+		choose_fork(input->philo);
+		let_go_fork(input->philo);
 	}
 	return (NULL);
 }

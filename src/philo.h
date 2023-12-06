@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 15:59:07 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/06 16:20:28 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,28 @@ typedef struct s_input
 # define TRUE 1
 # define FALSE 0
 
-void		print_green(const char *message);
-void		print_blue(const char *message);
-void		print_red(const char *message);
+//		action
+void	let_go_fork(t_input *input);
+void	choose_fork(t_input *input);
+void	eat(t_input *input);
+void	think(t_input *input);
+void	psleep(t_input *input);
+
+//		init
+void	*routine(t_input *input);
+void	init_input(int argc, char **argv, t_input *input);
+void	init_philos(t_input *input);
+
+//		main
+int		main(int argc, char **argv);
+
+//		print color
+void	print_green(const char *message);
+void	print_blue(const char *message);
+void	print_red(const char *message);
+
+//		utils
+int	ft_calc_num_str(const char *str);
+int	ft_atoi(const char *str);
 
 #endif
