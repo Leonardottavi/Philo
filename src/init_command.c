@@ -6,13 +6,13 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/04 11:20:58 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/06 11:09:00 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	ft_calc_num_str(const char *str)
+int	ft_calc_num_str(const char *str)
 {
 	int	i;
 	int	num;
@@ -51,29 +51,29 @@ int	ft_atoi(const char *str)
 	return (ft_calc_num_str(str + i));
 }
 
-void	init_command(int argc, char **argv, t_imput *imput)
+void	init_command(int argc, char **argv, t_input *input)
 {
 	int i = 0;
 	if (argc < 5 || argc > 6)
-		printf("%s%s%s\n", RED, NUM_ARGS, RESET);
+		print_red("ERROR: The number of arguments must be 4 or 5")
 	if (argc == 5 || argc == 6)
 	{
 		while (argv[i])
 		{
 		if (ft_atoi(argv[i]) == FALSE)
 			{
-			printf("%s%s%s\n", RED, ARG1, RESET);
+			print_red("ERROR: Non numerical parametres")
 			exit(TRUE);
 			}
 			i++;
 		}
-		imput->number_of_philosophers = ft_atoi(argv[1]);
-		imput->time_to_die = ft_atoi(argv[2]);
-		imput->time_to_eat = ft_atoi(argv[3]);
-		imput->time_to_sleep = ft_atoi(argv[4]);
+		input->number_of_philosophers = ft_atoi(argv[1]);
+		input->time_to_die = ft_atoi(argv[2]);
+		input->time_to_eat = ft_atoi(argv[3]);
+		input->time_to_sleep = ft_atoi(argv[4]);
 		if (argc == 6)
-			imput->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
+			input->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 		else
-			imput->number_of_times_each_philosopher_must_eat = FALSE;
+			input->number_of_times_each_philosopher_must_eat = FALSE;
 	}
 }

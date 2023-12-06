@@ -1,94 +1,73 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/06 10:01:03 by lottavi           #+#    #+#             */
+/*   Updated: 2023/12/06 10:01:03 by lottavi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-uint64_t	timestamp_in_ms(void)
+u_int64_t
+	get_time(void)
 {
-	static uint64_t	start = 0;
+	static struct timeval	tv;
 
-	if (start == 0)
-		start = gettimeofday_ms();
-	return (gettimeofday_ms() - start);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * (u_int64_t)1000) + (tv.tv_usec / 1000));
 }
 
-static void	eat(t_philo *philo)
+void	eat(t_philo *philo, t_input *input)
 {
-	philo->eat_count++;
-	philo->last_meal = timestamp_in_ms();
+	philo->last_meal = get_time();
 	usleep(input->time_to_eat);
 }
 
-static void	choose_forks(t_philo *philo, int *fork1, int *fork2)
+void	choose_forks(t_input *input)
 {
-	int	flag;
-	t_input *input;
-
-	if (philo->sit % 2)
-	{
-		if (input->number_of_philos % 2)
-			flag = 0;
-		else
-			flag = 1;
-	}
-	else
-	{
-		if (input->number_of_philos % 2)
-			flag = 1;
-		else
-			flag = 0;
-	}
-	if (flag)
-	{
-		*fork1 = (philo->sit + 1) % (input->number_of_philos);
-		*fork2 = philo->sit;
-		return ;
-	}
-	*fork1 = philo->sit;
-	*fork2 = (philo->sit + 1) % (input->number_of_philos);
+	if(input->philo)
 }
 
-static void	pick_up_forks(t_philo *philo, t_input *input)
+void	pick_up_forks(t_input *input)
 {
-	int	fork1;
-	int	fork2;
-
-	choose_forks(philo, &fork1, &fork2);
-	pthread_mutex_lock(philo->forks + fork1);
-	pthread_mutex_lock(&philo->t1);
-	p_take_1(t_philo *philo);
-	pthread_mutex_unlock(&philo->t1);
-	pthread_mutex_lock(philo->forks + fork2);
-	pthread_mutex_lock(&philo->t1);
-	p_take_2(t_philo *philo);
-	pthread_mutex_unlock(&philo->t1);
+	choose_forks(input, fork1, fork2);
+	pthread_mutex_lock(input->philo->forks + fork1);
+	pthread_mutex_lock(&input->philo->t1);
+	print_blue("Philo has taken the left fork");
+	pthread_mutex_unlock(&input->philo->t1);
+	pthread_mutex_lock(input->philo->forks + fork2);
+	pthread_mutex_lock(&input->philo->t1);
+	print_blue("Philo has taken the right fork");
+	pthread_mutex_unlock(&input->philo->t1);
 }
 
-static void	let_go_forks(t_philo *philo)
+void	let_go_forks(t_philo *philo, t_input *input)
 {
 	pthread_mutex_unlock(philo->forks + ((philo->sit + 1)
-			% input->number_of_philos));
+			% input->number_of_philosophers));
 	pthread_mutex_unlock(philo->forks + philo->sit);
 }
 
-void	*routine(void *arg)
+void	*routine(t_input *input, t_philo *philo)
 {
-	t_philo	*philo;
-
-	if (!arg)
-		return (NULL);
-	philo = (t_philo *)arg;
 	while (1)
 	{
-		pick_up_forks(philo);
+		pick_up_forks(input);
 		pthread_mutex_lock(&philo->t1);
-		p_eat(t_philo *philo);
+		print_green("Philo is eating");
 		pthread_mutex_unlock(&philo->t1);
-		eat(philo);
+		eat(philo, input);
 		pthread_mutex_lock(&philo->t1);
-		p_sleep(t_philo *philo);
+		print_blue("Philo is sleeping");
 		pthread_mutex_unlock(&philo->t1);
-		let_go_forks(philo);
-		usleep(philo->conf->t_sleep - 10);
+		let_go_forks(philo, input);
+		usleep(input->time_to_sleep - 10);
 		pthread_mutex_lock(&philo->t1);
-		p_think(t_philo *philo);
+		printf("Philo is thinking");
 		pthread_mutex_unlock(&philo->t1);
 	}
 	return (NULL);
