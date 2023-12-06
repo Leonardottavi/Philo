@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 12:47:00 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/06 15:59:07 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@
 typedef struct s_philo
 {
 	int				eating;
-	int				last_meal;
-	int				sit;
-	int				fork1;
-	int				fork2;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	t1;
+	int				eat_count;
+	pthread_mutex_t	fork1;
+	pthread_mutex_t	fork2;
+	pthread_mutex_t	id;
 }	t_philo;
 
 typedef struct s_input
@@ -37,6 +35,7 @@ typedef struct s_input
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		number_of_times_each_philosopher_must_eat;
+	pthread_mutex_t	lock;
 	t_philo	*philo;
 }			t_input;
 
@@ -48,20 +47,8 @@ typedef struct s_input
 # define TRUE 1
 # define FALSE 0
 
-//main
-int			create_threads(t_input *input);
-int			stop_threads(t_input *input);
-int			main(int argc, char **argv);
-
-//init_command
-void		init_command(int argc, char **argv, t_input *input);
-
-//print_color
 void		print_green(const char *message);
 void		print_blue(const char *message);
 void		print_red(const char *message);
-
-//routine
-void		*routine(t_input *input, t_philo *philo);
 
 #endif
