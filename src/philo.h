@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 16:20:28 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/08 11:40:14 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_input
 	int		time_to_sleep;
 	int		number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	lock;
-	t_philo	*philo;
+	struct	s_philo	*philo;
 }			t_input;
 
 #define RESET "\033[0m"
@@ -48,7 +48,7 @@ typedef struct s_input
 # define FALSE 0
 
 //		action
-void	let_go_fork(t_input *input);
+void	drop_fork(t_input *input);
 void	choose_fork(t_input *input);
 void	eat(t_input *input);
 void	think(t_input *input);

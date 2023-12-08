@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 16:20:42 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/08 11:59:06 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_input(int argc, char **argv, t_input *input)
 	{
 		while (argv[i])
 		{
-		if (ft_atoi(argv[i]) == FALSE)
+		if (ft_atoi(argv[i > 1]) == FALSE)
 			{
 			print_red("ERROR: Non numerical parametres");
 			exit(TRUE);
@@ -58,14 +58,17 @@ void	init_input(int argc, char **argv, t_input *input)
 
 void	*routine(t_input *input)
 {
-	while (1)
+	int	i;
+
+	i = 0;
+	while (i <= input->number_of_philosophers)
 	{
-		sleep(input->philo);
-		think(input->philo);
-		eat(input->philo);
-		choose_fork(input->philo);
-		let_go_fork(input->philo);
+
+		psleep(input);
+		think(input);
+		choose_fork(input);
+		eat(input);
+		drop_fork(input);
 	}
 	return (NULL);
 }
-
