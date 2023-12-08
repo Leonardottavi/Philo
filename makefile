@@ -6,7 +6,7 @@
 #    By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 09:42:17 by lottavi           #+#    #+#              #
-#    Updated: 2023/11/29 12:04:07 by lottavi          ###   ########.fr        #
+#    Updated: 2023/12/08 12:26:26 by lottavi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,11 @@ $(TARGET): $(OBJS)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | directories
 	$(CC) $(CFLAGS) -c $< -o $@
 
-directories:
-	mkdir -p $(OBJ_DIR)
-
 all:
 	directories $(TARGET)
+
+directories:
+	mkdir -p $(OBJ_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR)

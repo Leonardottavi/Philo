@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/06 15:23:30 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/08 12:15:29 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,3 @@ int	ft_atoi(const char *str)
 		return (ft_calc_num_str(str + i) * (-1));
 	return (ft_calc_num_str(str + i));
 }
-

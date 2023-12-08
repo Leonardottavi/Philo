@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/08 11:59:06 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/08 12:24:37 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_input(int argc, char **argv, t_input *input)
 	{
 		while (argv[i])
 		{
-		if (ft_atoi(argv[i > 1]) == FALSE)
+		if (ft_atoi(argv[i]) == TRUE)
 			{
 			print_red("ERROR: Non numerical parametres");
 			exit(TRUE);
