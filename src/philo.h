@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/24 15:18:36 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/24 15:31:32 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,22 @@ typedef struct s_input
 # define TRUE 1
 # define FALSE 0
 
-//		action
-void	drop_fork(t_input *input);
-void	take_fork(t_input *input);
-void	eat(t_input *input);
-void	think(t_input *input);
 void	psleep(t_input *input);
-
-//		init
-void	*routine(t_input *input);
-void	init_input(int argc, char **argv, t_input *input);
-void	init_philos(t_input *input);
-
-//		main
-int		main(int argc, char **argv);
-
-//		print color
-void	print_green(const char *message);
-void	print_blue(const char *message);
-void	print_red(const char *message);
-
-//		utils
+void choose_fork(t_input *input);
+void drop_fork(t_input *input);
+void	eat(t_input *input);
+void	die(t_input *input);
+//
+long long	timestamp(void);
+void	ft_usleep(int ms);;
 int	ft_calc_num_str(const char *str);
 int	ft_atoi(const char *str);
-void	ft_usleep(int ms);
-long long	timestamp(void);
+//
+void	init_philos(t_input *input);
+void	init_input(int argc, char **argv, t_input *input);
+//
+void print_green(const char *message);
+void print_blue(const char *message);
+void print_red(const char *message);
 
 #endif

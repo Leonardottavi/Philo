@@ -79,3 +79,10 @@ void	die(t_input *input)
 		i--;
 	}
 }
+
+void	routine(t_input *input)
+{
+	psleep(input);
+	eat(input);
+	die(input);
+}
