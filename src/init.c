@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/08 12:24:37 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/24 15:19:13 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	init_philos(t_input *input)
 	{
 		input->philo[i].eating = 0;
 		input->philo[i].eat_count = 0;
-		pthread_mutex_init(&input->philo[i].fork1, NULL);
-		pthread_mutex_init(&input->philo[i].fork2, NULL);
+		pthread_mutex_init(&input->philo[i].fork_l, NULL);
+		pthread_mutex_init(&input->philo[i].fork_r, NULL);
 		pthread_mutex_init(&input->philo[i].id, NULL);
+		pthread_mutex_init(&input->philo[i].lock, NULL);
 		i++;
 	}
 }
@@ -31,7 +32,6 @@ void	init_philos(t_input *input)
 void	init_input(int argc, char **argv, t_input *input)
 {
 	int i = 0;
-	pthread_mutex_init(&input[i].lock, NULL);
 	if (argc < 5 || argc > 6)
 		print_red("ERROR: The number of arguments must be 4 or 5");
 	if (argc == 5 || argc == 6)
@@ -54,21 +54,4 @@ void	init_input(int argc, char **argv, t_input *input)
 		else
 			input->number_of_times_each_philosopher_must_eat = FALSE;
 	}
-}
-
-void	*routine(t_input *input)
-{
-	int	i;
-
-	i = 0;
-	while (i <= input->number_of_philosophers)
-	{
-
-		psleep(input);
-		think(input);
-		choose_fork(input);
-		eat(input);
-		drop_fork(input);
-	}
-	return (NULL);
 }

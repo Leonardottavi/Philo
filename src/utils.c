@@ -6,11 +6,28 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/08 12:15:29 by lottavi          ###   ########.fr       */
+/*   Updated: 2023/12/21 10:32:05 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long long	timestamp(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	ft_usleep(int ms)
+{
+	long int	time;
+
+	time = timestamp();
+	while (timestamp() - time < ms)
+		usleep(ms / 10);
+}
 
 int	ft_calc_num_str(const char *str)
 {
