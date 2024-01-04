@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/24 15:31:32 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/04 15:15:37 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <errno.h>
 
 typedef struct s_philo
 {
+	pthread_t		thread;
 	int				eating;
 	int				eat_count;
 	pthread_mutex_t	fork_l;
@@ -65,5 +65,9 @@ void	init_input(int argc, char **argv, t_input *input);
 void print_green(const char *message);
 void print_blue(const char *message);
 void print_red(const char *message);
+int mutex_status(pthread_mutex_t *mutex);
+void	thread_create(t_input *input);
+int	check_input(char **argv);
+void	check(int argc, char **argv);
 
 #endif

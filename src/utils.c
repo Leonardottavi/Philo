@@ -6,11 +6,23 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2023/12/21 10:32:05 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/04 14:59:37 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int mutex_status(pthread_mutex_t *mutex)
+{
+	int status = pthread_mutex_lock(mutex);
+	if (status == 0)
+	{
+		pthread_mutex_unlock(mutex);
+		return 0;
+	}
+	else
+		return 1;
+}
 
 long long	timestamp(void)
 {
@@ -66,4 +78,24 @@ int	ft_atoi(const char *str)
 	if (min == 1)
 		return (ft_calc_num_str(str + i) * (-1));
 	return (ft_calc_num_str(str + i));
+}
+
+int	check_input(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (argv[i][j] < 48 || argv[i][j] > 57)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
