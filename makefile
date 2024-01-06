@@ -6,12 +6,12 @@
 #    By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 09:42:17 by lottavi           #+#    #+#              #
-#    Updated: 2024/01/04 15:18:24 by lottavi          ###   ########.fr        #
+#    Updated: 2024/01/05 18:28:50 by lottavi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 SRC_DIR = src
 OBJ_DIR = obj
 TARGET = philo
@@ -21,10 +21,10 @@ SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -lpthread
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | directories
-	$(CC) $(CFLAGS) -c $< -o $@ -lpthread
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all:
 	directories $(TARGET)

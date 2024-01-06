@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/04 15:53:50 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/05 20:52:21 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	check(int argc, char **argv)
 {
 	if (argc != 5 && argc != 6)
 	{
-		print_red("ERROR: The number of arguments must be 4 or 5");
+		print_red("ERROR: The number of arguments must be 4 or 5\n");
 		exit(EXIT_SUCCESS);
 	}
 	if(check_input(argv) == 1)
 	{
-		print_red("ERROR: Non numerical parametres");
+		print_red("ERROR: Non numerical parametres\n");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -36,6 +36,16 @@ void	init_input(int argc, char **argv, t_input *input)
 		input->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	else
 		input->number_of_times_each_philosopher_must_eat = FALSE;
+}
+
+void	alloc(t_input *input)
+{
+	input->philo = malloc(sizeof(t_philo) * input->number_of_philosophers);
+	if (!input->philo)
+	{
+		print_red("ERROR: Malloc failed\n");
+		exit(EXIT_SUCCESS);
+	}
 }
 
 void	init_philos(t_input *input)
@@ -61,12 +71,14 @@ void	routine(void *arg)
 	psleep(arg);
 }
 
-void	thread_create(t_input *input)
+void	thread(t_input *input)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (i < input->number_of_philosophers)
 	{
-		pthread_create(&input->philo->thread, NULL, (void *)routine, input);
+		pthread_create(&input->philo[i].thread, NULL, (void *)routine, &input->philo[i]);
 		i++;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/04 15:15:37 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/05 20:37:25 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void print_green(const char *message);
 void print_blue(const char *message);
 void print_red(const char *message);
 int mutex_status(pthread_mutex_t *mutex);
-void	thread_create(t_input *input);
+void	thread(t_input *input);
 int	check_input(char **argv);
 void	check(int argc, char **argv);
+void	alloc(t_input *input);
 
 #endif
