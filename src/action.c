@@ -12,49 +12,43 @@
 
 #include "philo.h"
 
-void	psleep(t_input *input)
+void	psleep(t_philo *philo)
 {
-	pthread_mutex_lock(&input->philo->lock);
-	print_blue("Philo is sleeping");
-	ft_usleep(input->time_to_sleep);
-	pthread_mutex_unlock(&input->philo->lock);
+	pthread_mutex_lock(&philo->lock);
+	print_blue("is sleeping", philo->id, (timestamp() - philo->start));
+	ft_usleep(philo->input->time_to_sleep);
+	pthread_mutex_unlock(&philo->lock);
+	print_blue("is thinking", philo->id, (timestamp() - philo->start));
 }
 
-void choose_fork(t_input *input)
+void	choose_fork(t_philo *philo)
 {
-	if(mutex_status(&input->philo->fork_l) == 0)
-	{
-		pthread_mutex_lock(&input->philo->fork_l);
-		print_green("Philo has taken the left fork");
-	}
-	if(mutex_status(&input->philo->fork_r) == 0)
-	{
-		pthread_mutex_lock(&input->philo->fork_r);
-		print_green("Philo has taken the right fork");
-	}
+	pthread_mutex_lock(philo->fork_l);
+	print_green("has taken a fork", philo->id, (timestamp() - philo->start));
+	pthread_mutex_lock(philo->fork_r);
+	print_green("has taken a fork", philo->id, (timestamp() - philo->start));
 }
 
-void drop_fork(t_input *input)
+void	drop_fork(t_philo *philo)
 {
-	if(mutex_status(&input->philo->fork_l) == 1)
-	{
-		pthread_mutex_unlock(&input->philo->fork_l);
-		print_green("Philo has drop the left fork");
-	}
-	if(mutex_status(&input->philo->fork_r) == 1)
-	{
-		pthread_mutex_unlock(&input->philo->fork_r);
-		print_green("Philo has drop the right fork");
-	}
+	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(philo->fork_r);
 }
 
-void	eat(t_input *input)
+void	eat(t_philo *philo)
 {
-	choose_fork(input);
-	pthread_mutex_lock(&input->philo->lock);
-	print_green("Philo is eating");
-	input->philo->eat_count++;
-	ft_usleep(input->time_to_eat);
-	pthread_mutex_unlock(&input->philo->lock);
-	drop_fork(input);
+	choose_fork(philo);
+	pthread_mutex_lock(&philo->lock);
+	print_green("is eating", philo->id, (timestamp() - philo->start));
+	philo->eat_count++;
+	ft_usleep(philo->input->time_to_eat);
+	pthread_mutex_unlock(&philo->lock);
+	drop_fork(philo);
+}
+
+void	die(t_philo *philo)
+{
+	philo->life_status = 0;
+	print_red("philo is dead", philo->id, (timestamp() - philo->start));
+	exit(EXIT_SUCCESS);
 }

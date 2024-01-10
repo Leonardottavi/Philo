@@ -6,69 +6,76 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/05 20:37:25 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/10 17:20:33 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-#include <pthread.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
 	pthread_t		thread;
 	int				eating;
 	int				eat_count;
-	pthread_mutex_t	fork_l;
-	pthread_mutex_t	fork_r;
-	pthread_mutex_t	id;
+	pthread_mutex_t	*fork_l;
+	pthread_mutex_t	*fork_r;
+	int				id;
+	int				life_status;
+	int				last_meal;
 	pthread_mutex_t	lock;
-}	t_philo;
+	long long		start;
+	struct s_input	*input;
+}					t_philo;
 
 typedef struct s_input
 {
-	int		number_of_philosophers;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		number_of_times_each_philosopher_must_eat;
-	struct	s_philo	*philo;
+	int					number_of_philosophers;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					number_of_times_each_philosopher_must_eat;
+	pthread_mutex_t		*forks;
+	struct s_philo		*philo;
 }			t_input;
 
-#define RESET "\033[0m"
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define BLUE "\033[0;34m"
+# define RESET "\033[0m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define BLUE "\033[0;34m"
 
 # define TRUE 1
 # define FALSE 0
 
-void	psleep(t_input *input);
-void choose_fork(t_input *input);
-void drop_fork(t_input *input);
-void	eat(t_input *input);
-void	die(t_input *input);
-//
+//actions.c
+void		psleep(t_philo *philo);
+void		eat(t_philo *philo);
+void		die(t_philo *philo);
+
+//init.c
+void		check(int argc, char **argv);
+void		init_input(int argc, char **argv, t_input *input);
+void		init_philos(t_input *input);
+int			init_forks(t_input *input);
+void		alloc(t_input *input);
+void		routine(void *arg);
+void		thread(t_input *input);
+
+//utils.c
+int			ft_atoi(const char *str);
+void		ft_usleep(int time);
+void		print_green(const char *message, int id, long long ms);
+void		print_blue(const char *message, int id, long long ms);
+void		print_red(const char *message, int id, long long ms);
+int			check_input(char **argv);
+int			mutex_status(pthread_mutex_t *mutex);
 long long	timestamp(void);
-void	ft_usleep(int ms);;
-int	ft_calc_num_str(const char *str);
-int	ft_atoi(const char *str);
-//
-void	init_philos(t_input *input);
-void	init_input(int argc, char **argv, t_input *input);
-//
-void print_green(const char *message);
-void print_blue(const char *message);
-void print_red(const char *message);
-int mutex_status(pthread_mutex_t *mutex);
-void	thread(t_input *input);
-int	check_input(char **argv);
-void	check(int argc, char **argv);
-void	alloc(t_input *input);
+void		print_error(const char *message);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/04 14:59:37 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/10 10:12:03 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,43 +41,31 @@ void	ft_usleep(int ms)
 		usleep(ms / 10);
 }
 
-int	ft_calc_num_str(const char *str)
-{
-	int	i;
-	int	num;
-
-	i = 0;
-	num = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if (i == 0)
-			num = (str[i] - '0');
-		else
-			num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	return (num);
-}
-
 int	ft_atoi(const char *str)
 {
+	int	neg;
+	int	num;
 	int	i;
-	int	min;
 
+	neg = 1;
+	num = 0;
 	i = 0;
-	min = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\r' || str[i] == '\n'
-		|| str[i] == '\v' || str[i] == '\f')
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
-			min++;
+			neg *= -1;
 		i++;
 	}
-	if (min == 1)
-		return (ft_calc_num_str(str + i) * (-1));
-	return (ft_calc_num_str(str + i));
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10;
+		num += (str[i] - 48);
+		i++;
+	}
+	num *= neg;
+	return (num);
 }
 
 int	check_input(char **argv)
