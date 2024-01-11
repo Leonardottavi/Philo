@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/10 17:20:33 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/11 16:19:58 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_input
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
+	pthread_t			monitor;
+	pthread_mutex_t		print;
 	pthread_mutex_t		*forks;
 	struct s_philo		*philo;
 }			t_input;
@@ -66,16 +68,16 @@ int			init_forks(t_input *input);
 void		alloc(t_input *input);
 void		routine(void *arg);
 void		thread(t_input *input);
+void		monitor(void *arg);
 
 //utils.c
+void		print_green(const char *message, int id, long long ms, t_input *input);
+void		print_blue(const char *message, int id, long long ms, t_input *input);
+void		print_red(const char *message, int id, long long ms, t_input *input);
 int			ft_atoi(const char *str);
-void		ft_usleep(int time);
-void		print_green(const char *message, int id, long long ms);
-void		print_blue(const char *message, int id, long long ms);
-void		print_red(const char *message, int id, long long ms);
 int			check_input(char **argv);
 int			mutex_status(pthread_mutex_t *mutex);
 long long	timestamp(void);
-void		print_error(const char *message);
+void		ft_usleep(int time);
 
 #endif

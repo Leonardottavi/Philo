@@ -6,23 +6,48 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/10 17:21:51 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/11 17:00:52 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check(int argc, char **argv)
+void	routine(void *arg)
 {
-	if (argc != 5 && argc != 6)
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	philo->start = timestamp();
+	while (philo->life_status == TRUE)
 	{
-		print_error("ERROR: The number of arguments must be 4 or 5\n");
-		exit(EXIT_SUCCESS);
+		if (philo->id % 2 == 0)
+			ft_usleep(100);
+		eat(philo);
+		psleep(philo);
 	}
-	if (check_input (argv) == 1)
+}
+
+void	monitor(void *arg)
+{
+	t_input	*input;
+	int		i;
+
+	input = (t_input *)arg;
+	ft_usleep(input->time_to_die);
+	while (TRUE)
 	{
-		print_error("ERROR: Non numerical parametres\n");
-		exit(EXIT_SUCCESS);
+		i = 0;
+		while (i < input->number_of_philosophers)
+		{
+			if (input->number_of_philosophers == 1)
+				die(input->philo);
+			if (timestamp() - input->philo[i].last_meal >= input->time_to_die)
+				die(input->philo);
+			if (input->number_of_times_each_philosopher_must_eat <= input->philo->eat_count)
+				printf("All philosophers have eaten\n");
+				exit(EXIT_SUCCESS);
+			i++;
+		}
 	}
 }
 
@@ -31,19 +56,18 @@ void	thread(t_input *input)
 	int	i;
 
 	i = 0;
+	pthread_create(&input->monitor, NULL, (void *)monitor, input);
 	while (i < input->number_of_philosophers)
 	{
-		pthread_create(&input->philo[i].thread, NULL,
-			(void *)routine, &input->philo[i]);
-		usleep(1000);
+		pthread_create(&input->philo[i].thread, NULL, (void *)routine, &input->philo[i]);
 		i++;
 	}
-	i = 0;
 	while (i < input->number_of_philosophers)
 	{
 		pthread_join(input->philo[i].thread, NULL);
 		i++;
 	}
+	pthread_join(input->monitor, NULL);
 }
 
 int	main(int argc, char **argv)

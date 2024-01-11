@@ -6,29 +6,38 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/10 17:42:47 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/11 14:33:22 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	check(int argc, char **argv)
+{
+	if (argc != 5 && argc != 6)
+	{
+		printf("ERROR: The number of arguments must be 4 or 5\n");
+		exit(EXIT_SUCCESS);
+	}
+	if (check_input (argv) == 1)
+	{
+		printf("ERROR: Non numerical parametres\n");
+		exit(EXIT_SUCCESS);
+	}
+}
+
 void	alloc(t_input *input)
 {
 	input->philo = (t_philo *)malloc(sizeof(t_philo) * input->number_of_philosophers);
+	if (!input->philo)
+	{
+		printf("ERROR: Philo allocation failed\n");
+		exit(EXIT_SUCCESS);
+	}
 	input->forks = malloc(sizeof(pthread_mutex_t) * input->number_of_philosophers);
 	if (!input->forks)
 	{
-		print_error("ERROR: Forks allocation failed\n");
-		exit(EXIT_SUCCESS);
-	}
-	if (!input->philo)
-	{
-		print_error("ERROR: Philo allocation failed\n");
-		exit(EXIT_SUCCESS);
-	}
-	if (!input)
-	{
-		print_error("ERROR: Input allocation failed\n");
+		printf("ERROR: Forks allocation failed\n");
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -39,6 +48,7 @@ void	init_input(int argc, char **argv, t_input *input)
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);
 	input->time_to_sleep = ft_atoi(argv[4]);
+	pthread_mutex_init(&input->print, NULL);
 	if (argc == 6)
 		input->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	else
@@ -82,27 +92,4 @@ int	init_forks(t_input *input)
 		i++;
 	}
 	return (0);
-}
-
-void	routine(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	while (philo->life_status == 1)
-	{
-		philo->start = timestamp();
-		if (philo->id % 2 == 0)
-			ft_usleep(100);
-		if (philo->input->number_of_philosophers == 1)
-			die(philo);
-		eat(philo);
-		psleep(philo);
-		if (philo->input->time_to_die >= timestamp() - philo->last_meal)
-			die(philo);
-		if (philo->input->number_of_times_each_philosopher_must_eat == philo->input->philo->eat_count)
-		{
-			exit(EXIT_SUCCESS);
-		}
-	}
 }
