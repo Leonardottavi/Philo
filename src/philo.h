@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/11 16:19:58 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/11 18:17:40 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_input
 {
 	int					number_of_philosophers;
 	int					time_to_die;
+	int					death_raw;
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
@@ -76,7 +77,6 @@ void		print_blue(const char *message, int id, long long ms, t_input *input);
 void		print_red(const char *message, int id, long long ms, t_input *input);
 int			ft_atoi(const char *str);
 int			check_input(char **argv);
-int			mutex_status(pthread_mutex_t *mutex);
 long long	timestamp(void);
 void		ft_usleep(int time);
 
