@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/11 18:20:22 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 10:03:42 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	monitor(void *arg)
 		{
 			if (input->number_of_philosophers == 1)
 				die(input->philo);
-			if (timestamp() - input->philo[i].last_meal >= input->time_to_die)
-				die(input->philo);
 			if (input->number_of_times_each_philosopher_must_eat <= input->philo->eat_count)
+			{
 				printf("All philosophers have eaten\n");
 				exit(EXIT_SUCCESS);
+			}
 			i++;
 		}
 	}

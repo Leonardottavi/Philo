@@ -31,7 +31,6 @@ void	eat(t_philo *philo)
 	philo->eating = TRUE;
 	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
 	philo->eat_count++;
-	philo->input->time_to_die = philo->input->death_raw;
 	ft_usleep(philo->input->time_to_eat);
 	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
@@ -42,6 +41,6 @@ void	eat(t_philo *philo)
 void	die(t_philo *philo)
 {
 	print_red("philo is dead", philo->id, (timestamp() - philo->start), philo->input);
-	philo->life_status = 0;
+	philo->life_status = FALSE;
 	exit(EXIT_SUCCESS);
 }
