@@ -23,7 +23,7 @@ void	psleep(t_philo *philo)
 		(timestamp() - philo->start), philo->input);
 }
 
-void	eat(t_philo *philo)
+void	takefork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_l);
 	print_green("has taken a fork", philo->id,
@@ -31,6 +31,17 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(philo->fork_r);
 	print_green("has taken a fork", philo->id,
 		(timestamp() - philo->start), philo->input);
+}
+
+void	dropfork(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(philo->fork_r);
+}
+
+void	eat(t_philo *philo)
+{
+	takefork(philo);
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = TRUE;
 	print_green("is eating", philo->id,
@@ -41,8 +52,7 @@ void	eat(t_philo *philo)
 	philo->time_death = philo->last_meal + philo->input->time_to_die;
 	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
-	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->fork_r);
+	dropfork(philo);
 }
 
 void	die(t_philo *philo)
