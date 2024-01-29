@@ -43,15 +43,15 @@ void	eat(t_philo *philo)
 {
 	takefork(philo);
 	pthread_mutex_lock(&philo->lock);
-	philo->eating = TRUE;
 	print_green("is eating", philo->id,
 		(timestamp() - philo->start), philo->input);
+	philo->eating = TRUE;
 	philo->last_meal = timestamp();
 	philo->eat_count++;
 	ft_usleep(philo->input->time_to_eat);
 	philo->time_death = philo->last_meal + philo->input->time_to_die;
-	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
+	philo->eating = FALSE;
 	dropfork(philo);
 }
 
