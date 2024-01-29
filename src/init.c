@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 10:03:18 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 10:05:02 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	init_philos(t_input *input)
 		pthread_mutex_init(&input->philo[i].lock, NULL);
 		input->philo[i].input = input;
 		input->philo[i].start = timestamp();
+		input->philo[i].time_death = input->time_to_die;
 		i++;
 	}
 }

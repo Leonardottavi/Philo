@@ -30,6 +30,8 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = TRUE;
 	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
+	philo->last_meal = timestamp();
+	philo->time_death = philo->last_meal + philo->input->time_to_die;
 	philo->eat_count++;
 	ft_usleep(philo->input->time_to_eat);
 	philo->eating = FALSE;
