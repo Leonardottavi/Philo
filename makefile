@@ -6,12 +6,12 @@
 #    By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/29 09:42:17 by lottavi           #+#    #+#              #
-#    Updated: 2024/01/05 18:28:50 by lottavi          ###   ########.fr        #
+#    Updated: 2024/01/29 10:33:26 by lottavi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 SRC_DIR = src
 OBJ_DIR = obj
 TARGET = philo

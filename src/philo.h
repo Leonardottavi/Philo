@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 10:04:48 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 11:16:22 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	int				id;
 	int				life_status;
 	int				last_meal;
-	int 			time_death;
+	int				time_death;
 	pthread_mutex_t	lock;
 	long long		start;
 	struct s_input	*input;
@@ -37,11 +37,11 @@ typedef struct s_philo
 
 typedef struct s_input
 {
-	int					number_of_philosophers;
+	int					num_philo;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					number_of_times_each_philosopher_must_eat;
+	int					num_must_eat;
 	pthread_t			monitor;
 	pthread_mutex_t		print;
 	pthread_mutex_t		*forks;
@@ -72,9 +72,12 @@ void		thread(t_input *input);
 void		monitor(void *arg);
 
 //utils.c
-void		print_green(const char *message, int id, long long ms, t_input *input);
-void		print_blue(const char *message, int id, long long ms, t_input *input);
-void		print_red(const char *message, int id, long long ms, t_input *input);
+void		print_green(const char *message, int id,
+				long long ms, t_input *input);
+void		print_blue(const char *message, int id,
+				long long ms, t_input *input);
+void		print_red(const char *message, int id,
+				long long ms, t_input *input);
 int			ft_atoi(const char *str);
 int			check_input(char **argv);
 long long	timestamp(void);

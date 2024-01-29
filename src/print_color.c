@@ -6,13 +6,13 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 11:39:27 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/11 14:13:35 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 11:12:04 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_green(const char *message, int id, long long ms,t_input *input)
+void	print_green(const char *message, int id, long long ms, t_input *input)
 {
 	pthread_mutex_lock(&input->print);
 	printf("%s %lld %d %s %s\n", GREEN, ms, id, message, RESET);

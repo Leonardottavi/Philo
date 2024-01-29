@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 10:05:02 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 11:16:22 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	check(int argc, char **argv)
 
 void	alloc(t_input *input)
 {
-	input->philo = (t_philo *)malloc(sizeof(t_philo) * input->number_of_philosophers);
+	input->philo = (t_philo *)malloc(sizeof(t_philo) * input->num_philo);
 	if (!input->philo)
 	{
 		printf("ERROR: Philo allocation failed\n");
 		exit(EXIT_SUCCESS);
 	}
-	input->forks = malloc(sizeof(pthread_mutex_t) * input->number_of_philosophers);
+	input->forks = malloc(sizeof(pthread_mutex_t) * input->num_philo);
 	if (!input->forks)
 	{
 		printf("ERROR: Forks allocation failed\n");
@@ -44,15 +44,15 @@ void	alloc(t_input *input)
 
 void	init_input(int argc, char **argv, t_input *input)
 {
-	input->number_of_philosophers = ft_atoi(argv[1]);
+	input->num_philo = ft_atoi(argv[1]);
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);
 	input->time_to_sleep = ft_atoi(argv[4]);
 	pthread_mutex_init(&input->print, NULL);
 	if (argc == 6)
-		input->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
+		input->num_must_eat = ft_atoi(argv[5]);
 	else
-		input->number_of_times_each_philosopher_must_eat = FALSE;
+		input->num_must_eat = FALSE;
 }
 
 void	init_philos(t_input *input)
@@ -60,7 +60,7 @@ void	init_philos(t_input *input)
 	int	i;
 
 	i = 0;
-	while (i < input->number_of_philosophers)
+	while (i < input->num_philo)
 	{
 		input->philo[i].eating = 0;
 		input->philo[i].eat_count = 0;
@@ -80,13 +80,13 @@ int	init_forks(t_input *input)
 	int	i;
 
 	i = -1;
-	while (++i < input->number_of_philosophers)
+	while (++i < input->num_philo)
 		pthread_mutex_init(&input->forks[i], NULL);
 	i = 0;
 	input->philo[0].fork_l = &input->forks[0];
-	input->philo[0].fork_r = &input->forks[input->number_of_philosophers - 1];
+	input->philo[0].fork_r = &input->forks[input->num_philo - 1];
 	i = 1;
-	while (i < input->number_of_philosophers)
+	while (i < input->num_philo)
 	{
 		input->philo[i].fork_l = &input->forks[i];
 		input->philo[i].fork_r = &input->forks[i - 1];

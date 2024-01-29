@@ -15,25 +15,30 @@
 void	psleep(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->lock);
-	print_blue("is sleeping", philo->id, (timestamp() - philo->start), philo->input);
+	print_blue("is sleeping", philo->id,
+		(timestamp() - philo->start), philo->input);
 	ft_usleep(philo->input->time_to_sleep);
 	pthread_mutex_unlock(&philo->lock);
-	print_blue("is thinking", philo->id, (timestamp() - philo->start), philo->input);
+	print_blue("is thinking", philo->id,
+		(timestamp() - philo->start), philo->input);
 }
 
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_l);
-	print_green("has taken a fork", philo->id, (timestamp() - philo->start), philo->input);
+	print_green("has taken a fork", philo->id,
+		(timestamp() - philo->start), philo->input);
 	pthread_mutex_lock(philo->fork_r);
-	print_green("has taken a fork", philo->id, (timestamp() - philo->start), philo->input);
+	print_green("has taken a fork", philo->id,
+		(timestamp() - philo->start), philo->input);
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = TRUE;
-	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
+	print_green("is eating", philo->id,
+		(timestamp() - philo->start), philo->input);
 	philo->last_meal = timestamp();
-	philo->time_death = philo->last_meal + philo->input->time_to_die;
 	philo->eat_count++;
 	ft_usleep(philo->input->time_to_eat);
+	philo->time_death = philo->last_meal + philo->input->time_to_die;
 	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
 	pthread_mutex_unlock(philo->fork_l);
@@ -42,7 +47,8 @@ void	eat(t_philo *philo)
 
 void	die(t_philo *philo)
 {
-	print_red("philo is dead", philo->id, (timestamp() - philo->start), philo->input);
+	print_red("philo is dead", philo->id,
+		(timestamp() - philo->start), philo->input);
 	philo->life_status = FALSE;
 	exit(EXIT_SUCCESS);
 }
