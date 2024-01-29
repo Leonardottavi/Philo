@@ -12,17 +12,6 @@
 
 #include "philo.h"
 
-void	psleep(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->lock);
-	print_blue("is sleeping", philo->id,
-		(timestamp() - philo->start), philo->input);
-	ft_usleep(philo->input->time_to_sleep);
-	pthread_mutex_unlock(&philo->lock);
-	print_blue("is thinking", philo->id,
-		(timestamp() - philo->start), philo->input);
-}
-
 void	takefork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_l);
@@ -37,19 +26,23 @@ void	dropfork(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->fork_l);
 	pthread_mutex_unlock(philo->fork_r);
+	print_blue("is sleeping", philo->id,
+		(timestamp() - philo->start), philo->input);
+	ft_usleep(philo->input->time_to_sleep);
 }
 
 void	eat(t_philo *philo)
 {
+
 	takefork(philo);
 	pthread_mutex_lock(&philo->lock);
 	print_green("is eating", philo->id,
 		(timestamp() - philo->start), philo->input);
 	philo->eating = TRUE;
-	philo->last_meal = timestamp();
+	philo->last_meal_tick = timestamp() - philo->start;
 	philo->eat_count++;
+	philo->time_death = philo->input->time_to_die;
 	ft_usleep(philo->input->time_to_eat);
-	philo->time_death = philo->last_meal + philo->input->time_to_die;
 	pthread_mutex_unlock(&philo->lock);
 	philo->eating = FALSE;
 	dropfork(philo);
@@ -57,8 +50,10 @@ void	eat(t_philo *philo)
 
 void	die(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->lock);
 	print_red("philo is dead", philo->id,
 		(timestamp() - philo->start), philo->input);
 	philo->life_status = FALSE;
+	pthread_mutex_unlock(&philo->lock);
 	exit(EXIT_SUCCESS);
 }

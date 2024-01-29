@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 11:16:22 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 18:12:44 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_philos(t_input *input)
 		input->philo[i].eat_count = 0;
 		input->philo[i].id = i + 1;
 		input->philo[i].life_status = 1;
-		input->philo[i].last_meal = timestamp();
+		input->philo[i].last_meal_tick = 0;
 		pthread_mutex_init(&input->philo[i].lock, NULL);
 		input->philo[i].input = input;
 		input->philo[i].start = timestamp();

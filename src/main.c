@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 15:58:29 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/29 18:16:42 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	routine(void *arg)
 		if (philo->id % 2 == 0)
 			ft_usleep(100);
 		eat(philo);
-		psleep(philo);
+		print_blue("is thinking", philo->id,
+			(timestamp() - philo->start), philo->input);
 	}
 }
 
@@ -33,16 +34,23 @@ void	monitor(void *arg)
 	int		i;
 
 	input = (t_input *)arg;
-	ft_usleep(input->time_to_die);
-	while (TRUE)
+	while (input->philo->life_status == TRUE)
 	{
 		i = 0;
 		while (i < input->num_philo)
 		{
+			ft_usleep(input->philo[i].time_death);
 			if (input->num_philo == 1)
 				die(input->philo);
-			if (input->philo->last_meal > input->philo->time_death && input->philo->eating == FALSE)
-				die(input->philo);
+			if (input->philo[i].eating == FALSE)
+			{
+				if (input->philo[i].time_death <= input->philo->start + input->philo[i].last_meal_tick) //FIXME
+				{
+					printf( "last_meal_tick: %d\n", input->philo[i].last_meal_tick);
+					printf("time_death: %d\n", input->philo[i].time_death);
+					die(&input->philo[i]);
+				}
+			}
 			if (input->num_must_eat && (input->philo[i].eat_count >= input->num_must_eat))
 			{
 				pthread_mutex_lock(&input->print);
