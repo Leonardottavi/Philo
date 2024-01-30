@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 09:07:27 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 21:15:00 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 	int				id;
-	int				last_meal_tick;
-	int				time_death;
+	long long		last_meal_tick;
+	long long		time_death;
 	pthread_mutex_t	lock;
 	long long		start;
 	struct s_input	*input;
