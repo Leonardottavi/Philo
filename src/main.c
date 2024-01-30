@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 11:10:52 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 16:16:30 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,16 @@ void	monitor(void *arg)
 			ft_usleep(input->time_to_die);
 			if (input->num_philo == 1)
 				die(input->philo);
-			if (input->num_must_eat && (input->philo[i].eat_count >= input->num_must_eat))
+			if (input->num_must_eat
+				&& (input->philo[i].eat_count >= input->num_must_eat))
 			{
 				pthread_mutex_lock(&input->print);
 				printf("All philosophers have eaten\n");
 				exit(EXIT_SUCCESS);
 			}
-			if (input->philo->eating == FALSE)
-			{
-				if (timestamp() - input->philo->start >= input->philo->time_death)
-				{
-					die(&input->philo[i]);
-				}
-			}
+			if (timestamp() - input->philo->start >= input->philo->time_death
+				&& input->philo->eating == FALSE)
+				die(&input->philo[i]);
 			i++;
 		}
 	}
