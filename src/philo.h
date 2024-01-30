@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 21:15:00 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 23:01:04 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_input
 {
 	int					life_status;
 	int					num_philo;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
+	long long			time_to_die;
+	long long			time_to_eat;
+	long long			time_to_sleep;
 	int					num_must_eat;
 	pthread_t			*monitor;
 	pthread_mutex_t		print;
