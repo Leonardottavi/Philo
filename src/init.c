@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 18:12:44 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 10:02:28 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	check(int argc, char **argv)
 
 void	alloc(t_input *input)
 {
+	input->monitor = malloc(sizeof(pthread_t) * input->num_philo);
+	if (!input->monitor)
+	{
+		printf("ERROR: Monitor allocation failed\n");
+		exit(EXIT_SUCCESS);
+	}
 	input->philo = (t_philo *)malloc(sizeof(t_philo) * input->num_philo);
 	if (!input->philo)
 	{

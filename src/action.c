@@ -36,15 +36,13 @@ void	eat(t_philo *philo)
 
 	takefork(philo);
 	pthread_mutex_lock(&philo->lock);
-	print_green("is eating", philo->id,
-		(timestamp() - philo->start), philo->input);
 	philo->eating = TRUE;
-	philo->last_meal_tick = timestamp() - philo->start;
+	philo->time_death = timestamp() - philo->start + philo->input->time_to_die;
+	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
 	philo->eat_count++;
-	philo->time_death = philo->input->time_to_die;
 	ft_usleep(philo->input->time_to_eat);
-	pthread_mutex_unlock(&philo->lock);
 	philo->eating = FALSE;
+	pthread_mutex_unlock(&philo->lock);
 	dropfork(philo);
 }
 

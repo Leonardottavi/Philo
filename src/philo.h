@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 16:44:46 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 10:00:09 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_input
 	int					time_to_eat;
 	int					time_to_sleep;
 	int					num_must_eat;
-	pthread_t			monitor;
+	pthread_t			*monitor;
 	pthread_mutex_t		print;
 	pthread_mutex_t		*forks;
 	struct s_philo		*philo;
