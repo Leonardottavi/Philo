@@ -26,9 +26,6 @@ void	dropfork(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->fork_l);
 	pthread_mutex_unlock(philo->fork_r);
-	print_blue("is sleeping", philo->id,
-		(timestamp() - philo->start), philo->input);
-	ft_usleep(philo->input->time_to_sleep);
 }
 
 void	eat(t_philo *philo)
@@ -59,9 +56,11 @@ void	die(t_philo *philo)
 
 void	psleep(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->lock);
 	print_blue("is sleeping", philo->id,
 		(timestamp() - philo->start), philo->input);
 	ft_usleep(philo->input->time_to_sleep);
+	pthread_mutex_unlock(&philo->lock);
 	print_blue("is thinking", philo->id,
 		(timestamp() - philo->start), philo->input);
 }
