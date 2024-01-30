@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 10:00:09 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 17:07:01 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,9 @@ typedef struct s_input
 # define TRUE 1
 # define FALSE 0
 
-//actions.c
 void		psleep(t_philo *philo);
 void		eat(t_philo *philo);
 void		die(t_philo *philo);
-
-//init.c
 void		check(int argc, char **argv);
 void		init_input(int argc, char **argv, t_input *input);
 void		init_philos(t_input *input);
@@ -70,8 +67,6 @@ void		alloc(t_input *input);
 void		routine(void *arg);
 void		thread(t_input *input);
 void		monitor(void *arg);
-
-//utils.c
 void		print_green(const char *message, int id,
 				long long ms, t_input *input);
 void		print_blue(const char *message, int id,
@@ -82,5 +77,8 @@ int			ft_atoi(const char *str);
 int			check_input(char **argv);
 long long	timestamp(void);
 void		ft_usleep(int time);
+int			error(char *str, t_input *input);
+void		ft_exit(t_input *input);
+void		clear_data(t_input	*input);
 
 #endif

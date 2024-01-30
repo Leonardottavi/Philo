@@ -6,25 +6,11 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/29 11:13:30 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 17:03:34 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	mutex_status(pthread_mutex_t *mutex)
-{
-	int	status;
-
-	status = pthread_mutex_lock(mutex);
-	if (status == 0)
-	{
-		pthread_mutex_unlock(mutex);
-		return (FALSE);
-	}
-	else
-		return (TRUE);
-}
 
 long long	timestamp(void)
 {
