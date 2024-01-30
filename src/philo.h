@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 17:07:01 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 09:07:27 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_philo
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 	int				id;
-	int				life_status;
 	int				last_meal_tick;
 	int				time_death;
 	pthread_mutex_t	lock;
@@ -37,6 +36,7 @@ typedef struct s_philo
 
 typedef struct s_input
 {
+	int					life_status;
 	int					num_philo;
 	int					time_to_die;
 	int					time_to_eat;

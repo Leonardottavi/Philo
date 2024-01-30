@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 10:02:28 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 09:08:25 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	init_input(int argc, char **argv, t_input *input)
 	input->time_to_die = ft_atoi(argv[2]);
 	input->time_to_eat = ft_atoi(argv[3]);
 	input->time_to_sleep = ft_atoi(argv[4]);
+	input->life_status = 1;
 	pthread_mutex_init(&input->print, NULL);
 	if (argc == 6)
 		input->num_must_eat = ft_atoi(argv[5]);
@@ -71,7 +72,6 @@ void	init_philos(t_input *input)
 		input->philo[i].eating = 0;
 		input->philo[i].eat_count = 0;
 		input->philo[i].id = i + 1;
-		input->philo[i].life_status = 1;
 		input->philo[i].last_meal_tick = 0;
 		pthread_mutex_init(&input->philo[i].lock, NULL);
 		input->philo[i].input = input;

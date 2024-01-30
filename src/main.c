@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 17:04:39 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 09:26:15 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void	routine(void *arg)
 	philo = (t_philo *)arg;
 	philo->start = timestamp();
 	philo->time_death = philo->input->time_to_die + timestamp() - philo->start;
-	while (philo->life_status == TRUE)
+	while (philo->input->life_status == TRUE)
 	{
 		if (philo->id % 2 == 0)
 			ft_usleep(100);
 		eat(philo);
+		if (philo->input->life_status == FALSE)
+			break ;
 		psleep(philo);
 	}
 }
@@ -34,7 +36,7 @@ void	monitor(void *arg)
 	int		i;
 
 	input = (t_input *)arg;
-	while (input->philo->life_status == TRUE)
+	while (input->life_status == TRUE)
 	{
 		i = 0;
 		while (i < input->num_philo)
@@ -47,11 +49,15 @@ void	monitor(void *arg)
 			{
 				pthread_mutex_lock(&input->print);
 				printf("All philosophers have eaten\n");
-				exit(EXIT_SUCCESS);
+				input->life_status = FALSE;
+				break;
 			}
-			if (timestamp() - input->philo->start >= input->philo->time_death
+			if (input->philo->last_meal_tick >= input->philo->time_death
 				&& input->philo->eating == FALSE)
-				die(&input->philo[i]);
+				{
+					die(&input->philo[i]);
+					break;
+				}
 			i++;
 		}
 	}
