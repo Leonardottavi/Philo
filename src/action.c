@@ -41,6 +41,7 @@ void	eat(t_philo *philo)
 	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
 	philo->eat_count++;
 	ft_usleep(philo->input->time_to_eat);
+	philo->last_meal_tick = timestamp() - philo->start;
 	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
 	dropfork(philo);
@@ -54,4 +55,13 @@ void	die(t_philo *philo)
 	philo->life_status = FALSE;
 	pthread_mutex_unlock(&philo->lock);
 	exit(EXIT_SUCCESS);
+}
+
+void	psleep(t_philo *philo)
+{
+	print_blue("is sleeping", philo->id,
+		(timestamp() - philo->start), philo->input);
+	ft_usleep(philo->input->time_to_sleep);
+	print_blue("is thinking", philo->id,
+		(timestamp() - philo->start), philo->input);
 }
