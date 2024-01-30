@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 21:51:49 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 21:53:24 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	monitor(void *arg)
 			{
 				pthread_mutex_lock(&input->print);
 				printf("All philosophers have eaten\n");
+				input->life_status = FALSE;
 				break;
 			}
 			if (input->philo->last_meal_tick >= input->philo->time_death && input->philo->eating == FALSE)
