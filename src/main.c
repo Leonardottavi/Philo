@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 11:07:20 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/30 11:10:52 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ void	routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->start = timestamp();
-	philo->time_death = philo->input->time_to_die + timestamp();
+	philo->time_death = philo->input->time_to_die + timestamp() - philo->start;
 	while (philo->life_status == TRUE)
 	{
 		if (philo->id % 2 == 0)
 			ft_usleep(100);
 		eat(philo);
 		psleep(philo);
-
 	}
 }
 
