@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 15:01:05 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:37:02 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	check(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 	{
 		printf("ERROR: The number of arguments must be 4 or 5\n");
-		return(0);
+		return (0);
 	}
 	if (check_input (argv) == 1)
 	{
 		printf("ERROR: Non numerical parametres\n");
-		return(0);
+		return (0);
 	}
 	return (1);
 }

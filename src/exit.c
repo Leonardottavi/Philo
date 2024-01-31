@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:29:10 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 15:29:34 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:36:50 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@ void	ft_exit(t_input *input)
 	int	i;
 
 	i = 0;
-
 	while (i < input->num_philo)
 	{
 		if (!pthread_mutex_destroy(&input->print))
-			break;
+			break ;
 		if (!pthread_mutex_destroy(&input->philo[i].lock))
-			break;
+			break ;
 		if (!pthread_mutex_destroy(&input->forks[i]))
-			break;
+			break ;
 		i++;
 	}
 	freestack(input);
