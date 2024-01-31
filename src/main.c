@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 10:38:29 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 11:56:09 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	monitor(void *arg)
 			if (timestamp() - input->philo->start >= input->philo->time_death && input->philo->eating == FALSE)
 			{
 				die(input->philo);
-				printf("diff: %lld id %d\n", input->philo->time_death - input->philo->last_meal_tick, input->philo->id);
 				break;
 			}
 			i++;
@@ -90,6 +89,5 @@ int	main(int argc, char **argv)
 	init_philos(&input);
 	init_forks(&input);
 	thread(&input);
-	ft_exit(&input);
 	return (0);
 }
