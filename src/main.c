@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 15:02:55 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:30:28 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ void	monitor(void *arg)
 		while (i < input->num_philo)
 		{
 			ft_usleep(input->time_to_die);
-			if (input->philo->eat_count >= input->num_must_eat && input->num_must_eat)
+			if (input->philo->eat_count >= input->num_must_eat
+				&& input->num_must_eat)
 			{
 				pthread_mutex_lock(&input->print);
 				printf("All philosophers have eaten\n");
 				input->life_status = FALSE;
 				break;
 			}
-			if (timestamp() - input->philo->start >= input->philo->time_death && input->philo->eating == FALSE)
+			if (timestamp() - input->philo->start >= input->philo->time_death
+				&& input->philo->eating == FALSE)
 			{
 				die(input->philo);
 				break;
@@ -66,7 +68,8 @@ void	thread(t_input *input)
 	pthread_create(input->monitor, NULL, (void *)monitor, input);
 	while (i < input->num_philo)
 	{
-		pthread_create(&input->philo[i].thread, NULL, (void *)routine, &input->philo[i]);
+		pthread_create(&input->philo[i].thread, NULL,
+			(void *)routine, &input->philo[i]);
 		i++;
 	}
 	while (i < input->num_philo)
@@ -88,5 +91,6 @@ int	main(int argc, char **argv)
 	init_philos(&input);
 	init_forks(&input);
 	thread(&input);
+	ft_exit(&input);
 	return (0);
 }
