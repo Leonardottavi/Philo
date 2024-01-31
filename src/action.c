@@ -33,13 +33,13 @@ void	eat(t_philo *philo)
 	takefork(philo);
 	pthread_mutex_lock(&philo->lock);
 	print_green("is eating", philo->id, (timestamp() - philo->start), philo->input);
+	philo->last_meal_tick = timestamp() - philo->start;
+	philo->time_death = philo->input->time_to_die + philo->last_meal_tick;
+	ft_usleep(philo->input->time_to_eat);
 	philo->eating = TRUE;
 	philo->eat_count++;
 	printf("last meal: %lld id %d\n", philo->last_meal_tick, philo->id);
 	printf("time death: %lld id %d\n", philo->time_death, philo->id);
-	ft_usleep(philo->input->time_to_eat);
-	philo->last_meal_tick = timestamp() - philo->start;
-	philo->time_death = philo->input->time_to_die + philo->last_meal_tick;
 	philo->eating = FALSE;
 	pthread_mutex_unlock(&philo->lock);
 	dropfork(philo);
