@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 14:25:23 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 15:02:55 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	monitor(void *arg)
 		while (i < input->num_philo)
 		{
 			ft_usleep(input->time_to_die);
-			if (input->num_philo == 1)
-				die(input->philo);
 			if (input->philo->eat_count >= input->num_must_eat && input->num_must_eat)
 			{
 				pthread_mutex_lock(&input->print);
@@ -83,7 +81,8 @@ int	main(int argc, char **argv)
 {
 	t_input	input;
 
-	check(argc, argv, &input);
+	if(check(argc, argv) == 0)
+		return (0);
 	init_input(argc, argv, &input);
 	alloc(&input);
 	init_philos(&input);
