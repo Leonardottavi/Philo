@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 09:59:03 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 10:38:29 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	routine(void *arg)
 	while (philo->input->life_status == TRUE)
 	{
 		if (philo->id % 2 == 0)
-			ft_usleep(100);
+			ft_usleep(philo->input->time_to_eat / 50);
 		eat(philo);
 		if (philo->input->life_status == FALSE)
 			break ;
