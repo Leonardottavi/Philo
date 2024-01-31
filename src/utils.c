@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 15:23:05 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 17:03:34 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 14:25:17 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ int	check_input(char **argv)
 				return (1);
 			j++;
 		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_exit(t_input *input)
+{
+	int	i;
+
+	i = 0;
+	if (input->philo)
+		free(input->philo);
+	if (input->forks)
+		free(input->forks);
+	if (input->monitor)
+		free(input->monitor);
+	while (i < input->num_philo)
+	{
+		pthread_mutex_destroy(&input->print);
+		pthread_mutex_destroy(&input->philo->lock);
+		pthread_mutex_destroy(input->forks);
 		i++;
 	}
 	return (0);

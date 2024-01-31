@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 10:24:44 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/31 11:56:09 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 14:25:23 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 {
 	t_input	input;
 
-	check(argc, argv);
+	check(argc, argv, &input);
 	init_input(argc, argv, &input);
 	alloc(&input);
 	init_philos(&input);

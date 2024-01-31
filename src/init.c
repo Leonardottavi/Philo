@@ -6,23 +6,23 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 09:41:09 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 21:44:27 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 14:25:30 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	check(int argc, char **argv)
+void	check(int argc, char **argv, t_input *input)
 {
 	if (argc != 5 && argc != 6)
 	{
 		printf("ERROR: The number of arguments must be 4 or 5\n");
-		exit(EXIT_SUCCESS);
+		ft_exit(input);
 	}
 	if (check_input (argv) == 1)
 	{
 		printf("ERROR: Non numerical parametres\n");
-		exit(EXIT_SUCCESS);
+		ft_exit(input);
 	}
 }
 
@@ -32,19 +32,19 @@ void	alloc(t_input *input)
 	if (!input->monitor)
 	{
 		printf("ERROR: Monitor allocation failed\n");
-		exit(EXIT_SUCCESS);
+		ft_exit(input);
 	}
 	input->philo = (t_philo *)malloc(sizeof(t_philo) * input->num_philo);
 	if (!input->philo)
 	{
 		printf("ERROR: Philo allocation failed\n");
-		exit(EXIT_SUCCESS);
+		ft_exit(input);
 	}
 	input->forks = malloc(sizeof(pthread_mutex_t) * input->num_philo);
 	if (!input->forks)
 	{
 		printf("ERROR: Forks allocation failed\n");
-		exit(EXIT_SUCCESS);
+		ft_exit(input);
 	}
 }
 

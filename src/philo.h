@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:56:28 by lottavi           #+#    #+#             */
-/*   Updated: 2024/01/30 23:01:04 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/01/31 14:24:20 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ int			ft_atoi(const char *str);
 int			check_input(char **argv);
 long long	timestamp(void);
 void		ft_usleep(int time);
-int			error(char *str, t_input *input);
-void		ft_exit(t_input *input);
-void		clear_data(t_input	*input);
-
+int			ft_exit(t_input *input);
+int			ft_close();
 #endif
